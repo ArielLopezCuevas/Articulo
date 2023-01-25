@@ -101,3 +101,13 @@ conteos2_ola2 <- conteos %>%
   filter(semana == 01:12) %>% 
   group_by(cvegeo) %>% 
   tally()
+
+###se realiza el join de los conteos de la ola 2
+
+conteos2_ola2 <-left_join(conteos2_ola, conteos2_ola2, by="cvegeo") 
+
+###Se suma los conteos para sacar el general
+
+conteos2_ola2 <- conteos2_ola2 %>% 
+  mutate(ola2 = rowSums(conteos2_ola2[ , c(2,3)], na.rm=TRUE)) %>% 
+  select(-c(n.x, n.y))
