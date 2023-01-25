@@ -207,3 +207,79 @@ ola3 <- left_join(ola3, conteos3_ola, by="cvegeo")
 ola4 <- left_join(ola4, conteos4_ola, by="cvegeo")
 ola5 <- left_join(ola5, conteos5_ola, by="cvegeo")
 
+#Se saca grafica por olas para obesidad
+
+ola1 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola1) %>% 
+  tally() %>% 
+  mutate(porcen_obesidad = n*100/ola1) %>% 
+  filter(obesidad.x == "SI") %>% 
+  ggplot(aes(x = obesidad.y, y = porcen_obesidad))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "First wave obesity",
+       subtitle = "Datetime epiweek 2020-10 to epiweek 2020-32",
+       x = "% Prevalence obesity",
+       y = "% Population with obesity covid19")
+
+ola2 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola2) %>% 
+  tally() %>% 
+  mutate(porcen_obesidad = n*100/ola2) %>% 
+  filter(obesidad.x == "SI") %>% 
+  ggplot(aes(x = obesidad.y, y = porcen_obesidad))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Second wave obesity",
+       subtitle = "Datetime epiweek 2020-44 to epiweek 2021-12",
+       x = "% Prevalence obesity",
+       y = "% Population with obesity covid19")
+
+ola3 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola3) %>% 
+  tally() %>% 
+  mutate(porcen_obesidad = n*100/ola3) %>% 
+  filter(obesidad.x == "SI") %>% 
+  ggplot(aes(x = obesidad.y, y = porcen_obesidad))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Third wave obesity",
+       subtitle = "Datetime epiweek 2021-24 to epiweek 2021-42",
+       x = "% Prevalence obesity",
+       y = "% Population with obesity covid19")
+
+ola4 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola4) %>% 
+  tally() %>% 
+  mutate(porcen_obesidad = n*100/ola4) %>% 
+  filter(obesidad.x == "SI") %>% 
+  ggplot(aes(x = obesidad.y, y = porcen_obesidad))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Fourth wave obesity",
+       subtitle = "Datetime epiweek 2021-50 to epiweek 2022-14",
+       x = "% Prevalence obesity",
+       y = "% Population with obesity covid19")
+
+ola5 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola5) %>% 
+  tally() %>% 
+  mutate(porcen_obesidad = n*100/ola5) %>% 
+  filter(obesidad.x == "SI") %>% 
+  ggplot(aes(x = obesidad.y, y = porcen_obesidad))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Fifth wave obesity",
+       subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39",
+       x = "% Prevalence obesity",
+       y = "% Population with obesity covid19")
