@@ -85,3 +85,19 @@ ola1 <- conteos %>%
   separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
   filter(anuum == 2020) %>% 
   filter(semana == 10:32)
+
+##ola2
+
+conteos2_ola <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2020) %>% 
+  filter(semana == 44:53) %>% 
+  group_by(cvegeo) %>% 
+  tally()
+
+conteos2_ola2 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2021) %>% 
+  filter(semana == 01:12) %>% 
+  group_by(cvegeo) %>% 
+  tally()
