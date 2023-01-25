@@ -65,3 +65,23 @@ conteos1 <- conteos %>%  group_by(cvegeo) %>% tally()
 #Juntar las dos tablas 
 
 conteos2 <- left_join(conteos, conteos1)
+
+#Definamos por olas
+
+##Sacar conteos por olas
+
+##ola1
+
+conteos1_ola <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2020) %>% 
+  filter(semana == 10:32) %>% 
+  group_by(cvegeo) %>% 
+  tally()
+
+names(conteos1_ola)[2] <- "ola1"
+
+ola1 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2020) %>% 
+  filter(semana == 10:32)
