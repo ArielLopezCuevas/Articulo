@@ -198,3 +198,12 @@ ola5 <- conteos %>%
   separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
   filter(anuum == 2022) %>% 
   filter(semana == 21:39)
+
+#Se realiza el join para las olas
+
+ola1 <- left_join(ola1, conteos1_ola, by="cvegeo")
+ola2 <- left_join(ola2, conteos2_ola2, by="cvegeo")
+ola3 <- left_join(ola3, conteos3_ola, by="cvegeo")
+ola4 <- left_join(ola4, conteos4_ola, by="cvegeo")
+ola5 <- left_join(ola5, conteos5_ola, by="cvegeo")
+
