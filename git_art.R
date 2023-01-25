@@ -19,3 +19,20 @@ conteos <- conteos_semanales_covid_comorbilidades %>%
            sep = "\t")
 
 ensanut <- read_csv("~/R/ensanut_areas_peq.csv")
+
+#Cambiar los números por caracteres 
+
+names(ensanut)[1] <- "cvegeo"
+names(conteos)[9] <- "casos"
+conteos$obesidad <- gsub(1, "SI", conteos$obesidad)
+conteos$obesidad <- gsub(2, "NO", conteos$obesidad)
+conteos$obesidad <- gsub(98, "SE IGNORA", conteos$obesidad)
+conteos$diabetes <- gsub(1, "SI", conteos$diabetes)
+conteos$diabetes <- gsub(2, "NO", conteos$diabetes)
+conteos$diabetes <- gsub(98, "SE IGNORA", conteos$diabetes)
+conteos$hipertension <- gsub(1, "SI", conteos$hipertension)
+conteos$hipertension <- gsub(2, "NO", conteos$hipertension)
+conteos$hipertension <- gsub(98, "SE IGNORA", conteos$hipertension)
+conteos$tipo_paciente <- gsub(1, "AMBULATORIO", conteos$tipo_paciente)
+conteos$tipo_paciente <- gsub(2, "HOSPITALIZADO", conteos$tipo_paciente)
+conteos$tipo_paciente <- gsub(99, "NO ESPECIFICADO", conteos$tipo_paciente)
