@@ -505,3 +505,33 @@ mapa <- mapa %>%
 ##Hacemos un join completo para que pueda salir en el mapa baja california 
 
 mapmuni <- full_join(ensanut, mapa, by = "cvegeo")
+
+##Mapa para obesidad
+
+mapmuni %>% 
+  ggplot()+
+  geom_sf(aes(geometry = geometry, fill = obesidad))+
+  labs(title = "% Population with obesity in México",
+       caption = "Ensanut",
+       fill = "% Obesity")+
+  viridis::scale_fill_viridis()
+
+##Mapa para hipertension
+
+mapmuni %>% 
+  ggplot()+
+  geom_sf(aes(geometry = geometry, fill = hipertension))+
+  labs(title = "% Population with hypertension in México",
+       caption = "Ensanut",
+       fill = "% Hypertension")+
+  viridis::scale_fill_viridis()
+
+##Mapa para diabetes
+
+mapmuni %>% 
+  ggplot()+
+  geom_sf(aes(geometry = geometry, fill = diabetes))+
+  labs(title = "% Population with diabetes in México",
+       caption = "Ensanut",
+       fill = "% Diabetes")+
+  viridis::scale_fill_viridis()
