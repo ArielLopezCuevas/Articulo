@@ -125,3 +125,20 @@ ola2_1 <- conteos %>%
   filter(semana == 01:12)
 
 ola2 <- full_join(ola2, ola2_1)
+
+##ola 3
+#Se saca el conteo de la ola
+
+conteos3_ola <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2021) %>% 
+  filter(semana == 24:41) %>% 
+  group_by(cvegeo) %>% 
+  tally()
+
+names(conteos3_ola)[2] <- "ola3"
+
+ola3 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2021) %>% 
+  filter(semana == 24:41)
