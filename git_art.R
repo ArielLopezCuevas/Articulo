@@ -438,3 +438,58 @@ ola5 %>%
        subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39",
        x = "% Prevalence hypertension",
        y = "% Population with hypertension covid19")
+
+#Graficas generales sin filtrar por olas 
+
+#Ggplot hecho para obesidad
+
+conteos2 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, n) %>% 
+  tally() %>% 
+  mutate(porcen_obesidad = nn*100/n) %>% 
+  filter(obesidad.x == "SI") %>% 
+  ggplot(aes(x = obesidad.y, y = porcen_obesidad))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Obesity",
+       subtitle = "Datetime epiweek 2020-08 to epiweek 2023-01",
+       x = "% Prevalence obesity",
+       y = "% Population with obesity covid19")
+
+#ggplot hecho para diabetes
+
+conteos2 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, diabetes.x, diabetes.y, n) %>% 
+  tally() %>% 
+  mutate(porcen_diabetes = nn*100/n) %>% 
+  filter(diabetes.x == "SI") %>% 
+  ggplot(aes(x = diabetes.y, y = porcen_diabetes))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Diabetes",
+       subtitle = "Datetime epiweek 2020-08 to epiweek 2023-01",
+       x = "% Prevalence diabetes",
+       y = "% Population with diabetes covid19")
+
+#ggplot para hipertension
+
+conteos2 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, hipertension.x, hipertension.y, n) %>% 
+  tally() %>% 
+  mutate(porcen_hipertension = nn*100/n) %>% 
+  filter(hipertension.x == "SI") %>% 
+  ggplot(aes(x = hipertension.y, y = porcen_hipertension))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Hypertension",
+       subtitle = "Datetime epiweek 2020-08 to epiweek 2023-01",
+       x = "% Prevalence hypertension",
+       y = "% Population with hypertension covid19")
+
+
