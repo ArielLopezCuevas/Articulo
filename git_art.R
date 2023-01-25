@@ -361,3 +361,80 @@ ola5 %>%
        subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39",
        x = "% Prevalence diabetes",
        y = "% Population with diabetes covid19")
+
+#Hipertension por olas
+
+ola1 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, hipertension.x, hipertension.y, ola1) %>% 
+  tally() %>% 
+  mutate(porcen_hipertension = n*100/ola1) %>% 
+  filter(hipertension.x == "SI") %>% 
+  ggplot(aes(x = hipertension.y, y = porcen_hipertension))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "First wave hypertension",
+       subtitle = "Datetime epiweek 2020-10 to epiweek 2020-32",
+       x = "% Prevalence hypertension",
+       y = "% Population with hypertension covid19")
+
+ola2 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, hipertension.x, hipertension.y, ola2) %>% 
+  tally() %>% 
+  mutate(porcen_hipertension = n*100/ola2) %>% 
+  filter(hipertension.x == "SI") %>% 
+  ggplot(aes(x = hipertension.y, y = porcen_hipertension))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Second wave hypertension",
+       subtitle = "Datetime epiweek 2020-44 to epiweek 2021-12",
+       x = "% Prevalence hypertension",
+       y = "% Population with hypertension covid19")
+
+ola3 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, hipertension.x, hipertension.y, ola3) %>% 
+  tally() %>% 
+  mutate(porcen_hipertension = n*100/ola3) %>% 
+  filter(hipertension.x == "SI") %>% 
+  ggplot(aes(x = hipertension.y, y = porcen_hipertension))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Third wave hypertension",
+       subtitle = "Datetime epiweek 2021-24 to epiweek 2021-42",
+       x = "% Prevalence hypertension",
+       y = "% Population with hypertension covid19")
+
+ola4 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, hipertension.x, hipertension.y, ola4) %>% 
+  tally() %>% 
+  mutate(porcen_hipertension = n*100/ola4) %>% 
+  filter(hipertension.x == "SI") %>% 
+  ggplot(aes(x = hipertension.y, y = porcen_hipertension))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Fourth wave hypertension",
+       subtitle = "Datetime epiweek 2021-50 to epiweek 2022-14",
+       x = "% Prevalence hypertension",
+       y = "% Population with hypertension covid19")
+
+ola5 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, hipertension.x, hipertension.y, ola5) %>% 
+  tally() %>% 
+  mutate(porcen_hipertension = n*100/ola5) %>% 
+  filter(hipertension.x == "SI") %>% 
+  ggplot(aes(x = hipertension.y, y = porcen_hipertension))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Fifth wave hypertension",
+       subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39",
+       x = "% Prevalence hypertension",
+       y = "% Population with hypertension covid19")
