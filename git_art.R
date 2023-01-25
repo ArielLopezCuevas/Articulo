@@ -49,3 +49,11 @@ conteos <- conteos %>%
   mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
   mutate(cvegeo = as.numeric(paste0(entidad_res, municipio_res))) %>% 
   mutate(casos = as.numeric(conteos$casos))
+
+#Se cambia la clase del cvegeo de ensanut por dobble para que se pueda realizar el join
+
+ensanut <- ensanut %>% mutate(cvegeo = as.numeric(cvegeo))
+
+#Se saca el join
+
+conteos <- left_join(conteos, ensanut, by = "cvegeo")
