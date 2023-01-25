@@ -283,3 +283,81 @@ ola5 %>%
        subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39",
        x = "% Prevalence obesity",
        y = "% Population with obesity covid19")
+
+#Diabetes por olas
+
+ola1 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, diabetes.x, diabetes.y, ola1) %>% 
+  tally() %>% 
+  mutate(porcen_diabetes = n*100/ola1) %>% 
+  filter(diabetes.x == "SI") %>% 
+  ggplot(aes(x = diabetes.y, y = porcen_diabetes))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "First wave diabetes",
+       subtitle = "Datetime epiweek 2020-10 to epiweek 2020-32",
+       x = "% Prevalence diabetes",
+       y = "% Population with diabetes covid19")
+
+ola2 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, diabetes.x, diabetes.y, ola2) %>% 
+  tally() %>% 
+  mutate(porcen_diabetes = n*100/ola2) %>% 
+  filter(diabetes.x == "SI") %>% 
+  ggplot(aes(x = diabetes.y, y = porcen_diabetes))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Second wave diabetes",
+       subtitle = "Datetime epiweek 2020-44 to epiweek 2021-12",
+       x = "% Prevalence diabetes",
+       y = "% Population with diabetes covid19")
+
+
+ola3 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, diabetes.x, diabetes.y, ola3) %>% 
+  tally() %>% 
+  mutate(porcen_diabetes = n*100/ola3) %>% 
+  filter(diabetes.x == "SI") %>% 
+  ggplot(aes(x = diabetes.y, y = porcen_diabetes))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Third wave diabetes",
+       subtitle = "Datetime epiweek 2021-24 to epiweek 2021-42",
+       x = "% Prevalence diabetes",
+       y = "% Population with diabetes covid19")
+
+ola4 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, diabetes.x, diabetes.y, ola4) %>% 
+  tally() %>% 
+  mutate(porcen_diabetes = n*100/ola4) %>% 
+  filter(diabetes.x == "SI") %>% 
+  ggplot(aes(x = diabetes.y, y = porcen_diabetes))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Fourth wave diabetes",
+       subtitle = "Datetime epiweek 2021-50 to epiweek 2022-14",
+       x = "% Prevalence diabetes",
+       y = "% Population with diabetes covid19")
+
+ola5 %>% 
+  group_by(cvegeo, mun_nom, tipo_paciente, diabetes.x, diabetes.y, ola5) %>% 
+  tally() %>% 
+  mutate(porcen_diabetes = n*100/ola5) %>% 
+  filter(diabetes.x == "SI") %>% 
+  ggplot(aes(x = diabetes.y, y = porcen_diabetes))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  geom_abline()+
+  facet_grid(tipo_paciente~.)+
+  labs(title = "Fifth wave diabetes",
+       subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39",
+       x = "% Prevalence diabetes",
+       y = "% Population with diabetes covid19")
