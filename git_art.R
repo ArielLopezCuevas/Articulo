@@ -111,3 +111,17 @@ conteos2_ola2 <-left_join(conteos2_ola, conteos2_ola2, by="cvegeo")
 conteos2_ola2 <- conteos2_ola2 %>% 
   mutate(ola2 = rowSums(conteos2_ola2[ , c(2,3)], na.rm=TRUE)) %>% 
   select(-c(n.x, n.y))
+
+##Se filtra la tabla ola2 
+
+ola2 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2020) %>% 
+  filter(semana == 44:53) 
+
+ola2_1 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2021) %>% 
+  filter(semana == 01:12)
+
+ola2 <- full_join(ola2, ola2_1)
