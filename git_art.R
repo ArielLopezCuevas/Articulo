@@ -501,3 +501,7 @@ names(mapa)[1] <- "cvegeo"
 
 mapa <- mapa %>% 
   mutate(cvegeo = as.numeric(cvegeo))
+
+##Hacemos un join completo para que pueda salir en el mapa baja california 
+
+mapmuni <- full_join(ensanut, mapa, by = "cvegeo")
