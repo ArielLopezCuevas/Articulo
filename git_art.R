@@ -142,3 +142,59 @@ ola3 <- conteos %>%
   separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
   filter(anuum == 2021) %>% 
   filter(semana == 24:41)
+
+#ola 4
+
+conteos4_ola <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2021) %>% 
+  filter(semana == 50:53) %>% 
+  group_by(cvegeo) %>% 
+  tally()
+
+conteos4_ola4 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2022) %>% 
+  filter(semana == 01:14) %>% 
+  group_by(cvegeo) %>% 
+  tally()
+
+###se realiza el join de los conteos de la ola 4
+
+conteos4_ola <-left_join(conteos4_ola, conteos4_ola4, by="cvegeo") 
+
+###Se suma los conteos para sacar el general
+
+conteos4_ola <- conteos4_ola %>% 
+  mutate(ola4 = rowSums(conteos4_ola[ , c(2,3)], na.rm=TRUE)) %>% 
+  select(-c(n.x, n.y))
+
+##Se filtra la tabla ola4 
+
+ola4 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2021) %>% 
+  filter(semana == 50:53) 
+
+ola4_1 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2022) %>% 
+  filter(semana == 01:14)
+
+ola4 <- full_join(ola4, ola4_1)
+
+#ola 5
+
+conteos5_ola <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2022) %>% 
+  filter(semana == 21:39) %>% 
+  group_by(cvegeo) %>% 
+  tally()
+
+names(conteos5_ola)[2] <- "ola5"
+
+ola5 <- conteos %>% 
+  separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
+  filter(anuum == 2022) %>% 
+  filter(semana == 21:39)
