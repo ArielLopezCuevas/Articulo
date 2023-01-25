@@ -57,3 +57,11 @@ ensanut <- ensanut %>% mutate(cvegeo = as.numeric(cvegeo))
 #Se saca el join
 
 conteos <- left_join(conteos, ensanut, by = "cvegeo")
+
+#Para sacar la suma de los municipios
+
+conteos1 <- conteos %>%  group_by(cvegeo) %>% tally()
+
+#Juntar las dos tablas 
+
+conteos2 <- left_join(conteos, conteos1)
