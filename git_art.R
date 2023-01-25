@@ -36,3 +36,16 @@ conteos$hipertension <- gsub(98, "SE IGNORA", conteos$hipertension)
 conteos$tipo_paciente <- gsub(1, "AMBULATORIO", conteos$tipo_paciente)
 conteos$tipo_paciente <- gsub(2, "HOSPITALIZADO", conteos$tipo_paciente)
 conteos$tipo_paciente <- gsub(99, "NO ESPECIFICADO", conteos$tipo_paciente)
+
+#Mutate para sacar el cvegeo
+
+conteos <- conteos %>% 
+  mutate(entidad_res = str_pad(string = entidad_res, 
+                               width = 2, 
+                               side = "left", pad = 0)) %>%  
+  mutate(municipio_res = str_pad(string = conteos$municipio_res, 
+                                 width = 3, 
+                                 side = "left", pad = 0)) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  mutate(cvegeo = as.numeric(paste0(entidad_res, municipio_res))) %>% 
+  mutate(casos = as.numeric(conteos$casos))
