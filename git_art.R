@@ -492,4 +492,12 @@ conteos2 %>%
        x = "% Prevalence hypertension",
        y = "% Population with hypertension covid19")
 
+#Mapa de la prevalencia de las morbilidades por municipio
+##Leemos la base y cambiamos la base para poder hacer el join 
 
+mapa <- read_sf("00mun.shp")
+
+names(mapa)[1] <- "cvegeo"
+
+mapa <- mapa %>% 
+  mutate(cvegeo = as.numeric(cvegeo))
