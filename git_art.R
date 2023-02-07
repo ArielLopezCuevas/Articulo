@@ -187,7 +187,7 @@ conteos5_ola <- conteos %>%
   filter(anuum == 2022) %>% 
   filter(semana == 21:39) %>% 
   group_by(cvegeo) %>% 
-  tally()
+  summarise(n = sum(casos))
 
 names(conteos5_ola)[2] <- "ola5"
 
