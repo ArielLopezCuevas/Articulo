@@ -207,19 +207,21 @@ ola5 <- left_join(ola5, conteos5_ola, by="cvegeo")
 #Se saca grafica por olas para obesidad
 
 ola1 %>% 
-  group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola1) %>% 
+  group_by(cvegeo, entidad_res, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola1) %>% 
   summarise(n = sum(casos)) %>% 
   mutate(porcen_obesidad = n*100/ola1) %>% 
   filter(obesidad.x == "SI") %>% 
   ggplot(aes(x = obesidad.y, y = porcen_obesidad))+
-  geom_point()+
+  geom_point(aes(color=entidad_res),size = 1.5)+
+  scale_color_viridis(discrete=TRUE, option="viridis")+
   geom_smooth(method = lm)+
   geom_abline(linetype = 2)+
   facet_grid(tipo_paciente~.)+
   labs(title = "First wave obesity",
        subtitle = "Datetime epiweek 2020-10 to epiweek 2020-32",
        x = "% Prevalence obesity",
-       y = "% Population with obesity covid19")
+       y = "% Population with obesity covid19",
+       colour = "Mexico States")
 
 ola1 %>% 
   group_by(cvegeo, mun_nom, tipo_paciente, obesidad.x, obesidad.y, ola1) %>% 
