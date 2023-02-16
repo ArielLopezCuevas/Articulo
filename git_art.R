@@ -204,49 +204,36 @@ obesidad <- function(x){
     summarise(n = sum(casos)) %>% 
     mutate(porcen_obesidad = n*100/ola) %>% 
     filter(obesidad.x == "SI")
-  print(ggplot(grafica, aes(x = obesidad.y, y = porcen_obesidad))+
-          geom_point(aes(color=entidad_res),size = 1.5)+
-          scale_color_viridis(discrete=TRUE, option="viridis")+
-          geom_smooth(method = lm)+
-          geom_abline(linetype = 2)+
-          facet_grid(tipo_paciente~.)+
-          labs(x = "% Prevalence obesity",
-               y = "% Population with obesity covid19",
-               colour = "Mexico States"))
+  a <- ggplot(grafica, aes(x = obesidad.y, y = porcen_obesidad))+
+    geom_point(aes(color=entidad_res),size = 1.5)+
+    scale_color_viridis(discrete=TRUE, option="viridis")+
+    geom_smooth(method = lm)+
+    geom_abline(linetype = 2)+
+    facet_grid(tipo_paciente~.)+
+    labs(x = "% Prevalence obesity",
+         y = "% Population with obesity covid19",
+         colour = "Mexico States")
   
-  print(ggplot(grafica, aes(x = obesidad.y, y = porcen_obesidad))+
-          geom_point(aes(color=entidad_res),size = 1.5)+
-          scale_color_viridis(discrete=TRUE, option="viridis")+
-          geom_smooth(method = lm)+
-          geom_abline(linetype = 2)+
-          scale_x_continuous(limits = c(0,100))+
-          facet_grid(tipo_paciente~.)+
-          labs(x = "% Prevalence obesity",
-               y = "% Population with obesity covid19",
-               colour = "Mexico States"))
+  b <- ggplot(grafica, aes(x = obesidad.y, y = porcen_obesidad))+
+    geom_point(aes(color=entidad_res),size = 1.5)+
+    scale_color_viridis(discrete=TRUE, option="viridis")+
+    geom_smooth(method = lm)+
+    geom_abline(linetype = 2)+
+    scale_x_continuous(limits = c(0,100))+
+    facet_grid(tipo_paciente~.)+
+    labs(x = "% Prevalence obesity",
+         y = "% Population with obesity covid19",
+         colour = "Mexico States")
+  return(list(a, b))
 }
 
-#Graficas
+#Graficas para obesidad
 
-obesidad(ola1)+
-  labs(title = "First wave obesity",
-       subtitle = "Datetime epiweek 2020-10 to epiweek 2020-32")
-
-obesidad(ola2)+
-  labs(title = "Second wave obesity",
-       subtitle = "Datetime epiweek 2020-44 to epiweek 2021-12")
-
-obesidad(ola3)+
-  labs(title = "Third wave obesity",
-       subtitle = "Datetime epiweek 2021-24 to epiweek 2021-42")
-
-obesidad(ola4)+
-  labs(title = "Fourth wave obesity",
-       subtitle = "Datetime epiweek 2021-50 to epiweek 2022-14")
-
-obesidad(ola5)+
-  labs(title = "Fifth wave obesity",
-       subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39")
+obesidad(ola1)
+obesidad(ola2)
+obesidad(ola3)
+obesidad(ola4)
+obesidad(ola5)
 
 #Funcion para graficas de diabetes 
 
@@ -256,7 +243,7 @@ diabetes <- function(x){
     summarise(n = sum(casos)) %>% 
     mutate(porcen_diabetes = n*100/ola) %>% 
     filter(diabetes.x == "SI")
-  print(ggplot(grafica, aes(x = diabetes.y, y = porcen_diabetes))+
+  a <- ggplot(grafica, aes(x = diabetes.y, y = porcen_diabetes))+
           geom_point(aes(color=entidad_res),size = 1.5)+
           scale_color_viridis(discrete=TRUE, option="viridis")+
           geom_smooth(method = lm)+
@@ -264,9 +251,9 @@ diabetes <- function(x){
           facet_grid(tipo_paciente~.)+
           labs(x = "% Prevalence diabetes",
                y = "% Population with diabetes covid19",
-               colour = "Mexico States"))
+               colour = "Mexico States")
   
-  print(ggplot(grafica, aes(x = diabetes.y, y = porcen_diabetes))+
+   b<- ggplot(grafica, aes(x = diabetes.y, y = porcen_diabetes))+
           geom_point(aes(color=entidad_res),size = 1.5)+
           scale_color_viridis(discrete=TRUE, option="viridis")+
           geom_smooth(method = lm)+
@@ -275,29 +262,18 @@ diabetes <- function(x){
           facet_grid(tipo_paciente~.)+
           labs(x = "% Prevalence diabetes",
                y = "% Population with diabetes covid19",
-               colour = "Mexico States"))
+               colour = "Mexico States")
+   return(list(a, b))
+   
 }
 
-diabetes(ola1)+
-  labs(title = "First wave diabetes",
-       subtitle = "Datetime epiweek 2020-10 to epiweek 2020-32")
+#Graficas para diabetes
 
-diabetes(ola2)+
-  labs(title = "Second wave diabetes",
-       subtitle = "Datetime epiweek 2020-44 to epiweek 2021-12")
-
-diabetes(ola3)+
-  labs(title = "Third wave diabetes",
-       subtitle = "Datetime epiweek 2021-24 to epiweek 2021-42")
-
-diabetes(ola4)+
-  labs(title = "Fourth wave diabetes",
-       subtitle = "Datetime epiweek 2021-50 to epiweek 2022-14")
-
-diabetes(ola5)+
-  labs(title = "Fifth wave diabetes",
-       subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39")
-
+diabetes(ola1)
+diabetes(ola2)
+diabetes(ola3)
+diabetes(ola4)
+diabetes(ola5)
 
 #Funcion para graficas de hipertension 
 
@@ -307,7 +283,7 @@ hipertension <- function(x){
     summarise(n = sum(casos)) %>% 
     mutate(porcen_hipertension = n*100/ola) %>% 
     filter(hipertension.x == "SI")
-  print(ggplot(grafica, aes(x = hipertension.y, y = porcen_hipertension))+
+  a <- ggplot(grafica, aes(x = hipertension.y, y = porcen_hipertension))+
           geom_point(aes(color=entidad_res),size = 1.5)+
           scale_color_viridis(discrete=TRUE, option="viridis")+
           geom_smooth(method = lm)+
@@ -315,9 +291,9 @@ hipertension <- function(x){
           facet_grid(tipo_paciente~.)+
           labs(x = "% Prevalence hypertension",
                y = "% Population with hypertension covid19",
-               colour = "Mexico States"))
+               colour = "Mexico States")
   
-  print(ggplot(grafica, aes(x = hipertension.y, y = porcen_hipertension))+
+  b <- ggplot(grafica, aes(x = hipertension.y, y = porcen_hipertension))+
           geom_point(aes(color=entidad_res),size = 1.5)+
           scale_color_viridis(discrete=TRUE, option="viridis")+
           geom_smooth(method = lm)+
@@ -326,29 +302,17 @@ hipertension <- function(x){
           facet_grid(tipo_paciente~.)+
           labs(x = "% Prevalence hypertension",
                y = "% Population with hypertension covid19",
-               colour = "Mexico States"))
+               colour = "Mexico States")
+  return(list(a, b))
 }
 
-hipertension(ola1)+
-  labs(title = "First wave hypertension",
-       subtitle = "Datetime epiweek 2020-10 to epiweek 2020-32")
+#Graficas para hipertension
 
-hipertension(ola2)+
-  labs(title = "Second wave hypertension",
-       subtitle = "Datetime epiweek 2020-44 to epiweek 2021-12")
-
-hipertension(ola3)+
-  labs(title = "Third wave hypertension",
-       subtitle = "Datetime epiweek 2021-24 to epiweek 2021-42")
-
-hipertension(ola4)+
-  labs(title = "Fourth wave hypertension",
-       subtitle = "Datetime epiweek 2021-50 to epiweek 2022-14")
-
-hipertension(ola5)+
-  labs(title = "Fifth wave hypertension",
-       subtitle = "Datetime epiweek 2022-21 to epiweek 2022-39")
-
+hipertension(ola1)
+hipertension(ola2)
+hipertension(ola3)
+hipertension(ola4)
+hipertension(ola5)
 
 #Mapa de la prevalencia de las morbilidades por municipio
 ##Leemos la base y cambiamos la base para poder hacer el join 
