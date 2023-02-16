@@ -55,14 +55,6 @@ conteos <- conteos %>%
 
 conteos <- left_join(conteos, ensanut, by = "cvegeo")
 
-#Para sacar la suma de los municipios
-
-conteos1 <- conteos %>%  group_by(cvegeo) %>% summarise(n = sum(casos))
-
-#Juntar las dos tablas 
-
-conteos2 <- left_join(conteos, conteos1)
-
 #Definamos por olas
 
 ##Sacar conteos por olas
