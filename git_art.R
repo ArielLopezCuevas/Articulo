@@ -113,7 +113,7 @@ ola2_1 <- conteos %>%
   filter(anuum == 2021) %>% 
   filter(semana == 01:12)
 
-ola2 <- full_join(ola2, ola2_1)
+ola2 <- rbind(ola2, ola2_1)
 
 ##ola 3
 #Se saca el conteo de la ola
@@ -170,7 +170,7 @@ ola4_1 <- conteos %>%
   filter(anuum == 2022) %>% 
   filter(semana == 01:14)
 
-ola4 <- full_join(ola4, ola4_1)
+ola4 <- rbind(ola4, ola4_1)
 
 #ola 5
 
