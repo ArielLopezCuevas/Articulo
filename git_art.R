@@ -76,7 +76,7 @@ conteos1_ola <- conteos %>%
   group_by(cvegeo) %>% 
   summarise(casos_semana = sum(casos))
 
-names(conteos1_ola)[2] <- "ola1"
+names(conteos1_ola)[2] <- "ola"
 
 ola1 <- conteos %>% 
   separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
@@ -106,7 +106,7 @@ conteos2_ola2 <-left_join(conteos2_ola, conteos2_ola2, by="cvegeo")
 ###Se suma los conteos para sacar el general
 
 conteos2_ola2 <- conteos2_ola2 %>% 
-  mutate(ola2 = rowSums(conteos2_ola2[ , c(2,3)], na.rm=TRUE)) %>% 
+  mutate(ola = rowSums(conteos2_ola2[ , c(2,3)], na.rm=TRUE)) %>% 
   select(-c(n.x, n.y))
 
 ##Se filtra la tabla ola2 
@@ -133,7 +133,7 @@ conteos3_ola <- conteos %>%
   group_by(cvegeo) %>% 
   summarise(casos_semana = sum(casos))
 
-names(conteos3_ola)[2] <- "ola3"
+names(conteos3_ola)[2] <- "ola"
 
 ola3 <- conteos %>% 
   separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
@@ -163,7 +163,7 @@ conteos4_ola <-left_join(conteos4_ola, conteos4_ola4, by="cvegeo")
 ###Se suma los conteos para sacar el general
 
 conteos4_ola <- conteos4_ola %>% 
-  mutate(ola4 = rowSums(conteos4_ola[ , c(2,3)], na.rm=TRUE)) %>% 
+  mutate(ola = rowSums(conteos4_ola[ , c(2,3)], na.rm=TRUE)) %>% 
   select(-c(n.x, n.y))
 
 ##Se filtra la tabla ola4 
@@ -189,7 +189,7 @@ conteos5_ola <- conteos %>%
   group_by(cvegeo) %>% 
   summarise(n = sum(casos))
 
-names(conteos5_ola)[2] <- "ola5"
+names(conteos5_ola)[2] <- "ola"
 
 ola5 <- conteos %>% 
   separate(semana_epi_sintomas, into = c("anuum", "semana"), sep = "-") %>% 
