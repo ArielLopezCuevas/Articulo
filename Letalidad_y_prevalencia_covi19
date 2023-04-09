@@ -79,4 +79,42 @@ letalidad <- letalidad %>% mutate (letalidad = round(defunciones/contagios*100, 
 
 write_csv(letalidad, "letalidad.csv") 
  
- 
+##con obesidad
+
+def_obe <- conteos %>%  filter(obesidad.x== "SI") %>% 
+  group_by(cvegeo, ent_nom, mun_nom) %>% filter(defuncion == "TRUE") %>% 
+  summarise(defun_obesidad = sum(casos)) %>% na.omit()
+
+def_obe <- left_join(contagios, def_obe) %>% 
+  mutate(letalidad = round(defun_obesidad/contagios*100, 2)) %>% 
+  na.omit()
+
+write_csv(def_obe, "def_obesidad.csv")
+
+##con diabetes
+
+def_diabe <- conteos %>% 
+  filter(diabetes.x== "SI") %>% 
+  filter(defuncion == "TRUE") %>% 
+  group_by(cvegeo, ent_nom, mun_nom) %>% 
+  summarise(defun_diabetes = sum(casos)) %>% na.omit()
+
+def_diabe <- left_join(contagios, den_diabe) %>% 
+  mutate(letalidad = round(defun_diabetes/contagios*100, 2)) %>% 
+  na.omit()
+
+write_csv(def_diabe, "def_diabetes.csv")
+
+##con hipertension
+
+def_hiperten <- conteos %>% 
+  filter(hipertension.x == "SI") %>% 
+  filter(defuncion == "TRUE") %>% 
+  group_by(cvegeo, ent_nom, mun_nom) %>% 
+  summarise(defun_hipertension = sum(casos)) %>% na.omit
+
+def_hiperten <- left_join(contagios, den_hiperten) %>% 
+  mutate(letalidad = round(defun_hipertension/contagios*100, 2)) %>% 
+  na.omit()
+
+write_csv(def_hiperten, "def_hipertension.csv")
