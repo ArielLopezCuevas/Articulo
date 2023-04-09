@@ -62,3 +62,21 @@ conteos <- left_join(conteos, ensanut, by = "cvegeo")
 poblacion <- indicadores_de_pobreza_municipal_2020 %>% 
   mutate(cvegeo = sprintf("%05d", clave_municipio)) %>% 
            select(cvegeo, 1:7)
+ 
+#Letalidad
+
+contagios <- conteos %>% 
+  group_by(cvegeo, ent_nom, mun_nom) %>% summarise(contagios = sum(casos))
+
+defunciones <- conteos %>% 
+  filter(defuncion == "TRUE") %>% group_by(cvegeo, ent_nom, mun_nom) %>% 
+  summarise(defunciones = sum(casos))
+
+letalidad <- left_join(contagios, defunciones)
+
+letalidad <- letalidad %>% mutate (letalidad = round(defunciones/contagios*100, 2)) %>% 
+  na.omit()
+
+write_csv(letalidad, "letalidad.csv") 
+ 
+ 
