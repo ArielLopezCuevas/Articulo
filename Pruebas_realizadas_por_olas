@@ -1,0 +1,38 @@
+library(askpass)
+library(DBI)
+library(RPostgres)
+library(DBI)
+library(dbplyr)
+library(dplyr)
+library(ggplot2)
+
+conn <- dbConnect(
+  RPostgres::Postgres(),
+  user   = "ariel",
+  password = askpass::askpass(),
+  dbname = "epiteam",
+  options = "-c search_path=keter_epi"
+)
+
+# Consulta que te trae los primeros 10 registros de la tabla keter_epi.open_covid
+query <- "SELECT * FROM keter_epi.open_covid LIMIT 10"
+
+covid_table <- conn %>%
+  tbl(sql(query)) %>%
+  collect()
+#Para traer la base en formato R
+remota <- tbl(conn, "open_covid") %>% 
+  collect()
+
+remotapru <- remota %>% 
+  arrange(fecha_sintomas) %>%
+  mutate(annum = year(fecha_sintomas),
+         semana_epi = epiweek(fecha_sintomas)
+  ) %>%
+  mutate(semana_epi = str_pad(semana_epi, width = 2, side = "left", pad = "0")) %>%
+  mutate(semana_epi_completa = paste0(annum, "-", semana_epi)) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  select(semana_epi_completa, cvegeo, entidad_res, entidad_um, municipio_res, 
+         tipo_paciente, fecha_def, toma_muestra_lab, 
+         toma_muestra_antigeno, clasificacion_final, annum, semana_epi) %>% 
+  filter(clasificacion_final == 3|7) 
