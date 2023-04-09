@@ -118,3 +118,12 @@ def_hiperten <- left_join(contagios, den_hiperten) %>%
   na.omit()
 
 write_csv(def_hiperten, "def_hipertension.csv")
+
+#Prevalencia
+
+prevalencia <- left_join(contagios, poblacion) %>% 
+  mutate(prevalencia = round(contagios/poblacion*100, 2)) %>% 
+  filter(prevalencia > 1.00) %>% 
+  select(1:4, poblacion, prevalencia)
+
+write.csv(prevalencia, "prevalencia.csv")
