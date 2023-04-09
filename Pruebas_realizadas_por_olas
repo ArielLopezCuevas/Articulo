@@ -49,3 +49,30 @@ pruebasola1 <- remotapru %>%
 pruebasola1 <- left_join(poblacion, pruebasola1) %>% 
   mutate(porc_pruebas = round(pruebas/poblacion*100, 3)) %>% 
   select(-c(clave_entidad, clave_municipio, pobreza, pobreza_pob))
+  
+  ##ola 2
+
+pruebasola2 <- remotapru %>% 
+  filter(annum == 2020) %>% 
+  filter(semana_epi == 44:53) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  group_by(cvegeo, semana_epi_completa, entidad_res, municipio_res, annum, semana_epi) %>% 
+  tally() %>% group_by(cvegeo) %>% summarise(pruebas = sum(n))
+
+pruebasola2.1 <- remotapru %>% 
+  filter(annum == 2021) %>% 
+  filter(semana_epi == 01:12) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  group_by(cvegeo, semana_epi_completa, entidad_res, municipio_res, annum, semana_epi) %>% 
+  tally() %>% group_by(cvegeo) %>% summarise(pruebas = sum(n))
+
+pruebasola2 <- left_join(pruebasola2, pruebasola2.1, by = "cvegeo")
+
+pruebasola2 <- pruebasola2 %>% 
+  mutate(pruebas = rowSums(pruebasola2[ , c(2,3)], na.rm=TRUE)) %>% 
+  select(-c(pruebas.x, pruebas.y))
+
+pruebasola2 <- pruebasola2 %>% 
+  left_join(poblacion, pruebasola2, by = "cvegeo") %>% 
+  mutate(porc_pruebas = round(pruebas/poblacion*100, 3)) %>% 
+  select(-c(clave_entidad, clave_municipio, pobreza, pobreza_pob))
