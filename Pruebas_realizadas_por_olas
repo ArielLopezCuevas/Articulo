@@ -76,3 +76,64 @@ pruebasola2 <- pruebasola2 %>%
   left_join(poblacion, pruebasola2, by = "cvegeo") %>% 
   mutate(porc_pruebas = round(pruebas/poblacion*100, 3)) %>% 
   select(-c(clave_entidad, clave_municipio, pobreza, pobreza_pob))
+  
+ ##ola 3
+
+pruebasola3 <- remotapru %>% 
+  filter(semana_epi == 24:41) %>% 
+  filter(annum == 2021) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  group_by(cvegeo, semana_epi_completa, entidad_res, municipio_res, annum, semana_epi) %>% 
+  tally() %>% group_by(cvegeo) %>% summarise(pruebas = sum(n))
+
+pruebasola3 <- left_join(poblacion, pruebasola3) %>% 
+  mutate(porc_pruebas = round(pruebas/poblacion*100, 3)) %>% 
+  select(-c(clave_entidad, clave_municipio, pobreza, pobreza_pob))
+
+##ola 4
+
+pruebasola4 <- remotapru %>% 
+  filter(annum == 2021) %>% 
+  filter(semana_epi == 50:53) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  group_by(cvegeo, semana_epi_completa, entidad_res, municipio_res, annum, semana_epi) %>% 
+  tally() %>% group_by(cvegeo) %>% summarise(pruebas = sum(n))
+
+pruebasola4.1 <- remotapru %>% 
+  filter(annum == 2022) %>% 
+  filter(semana_epi == 01:14) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  group_by(cvegeo, semana_epi_completa, entidad_res, municipio_res, annum, semana_epi) %>% 
+  tally() %>% group_by(cvegeo) %>% summarise(pruebas = sum(n))
+
+pruebasola4 <- left_join(pruebasola4, pruebasola4.1, by = "cvegeo")
+
+pruebasola4 <- pruebasola4 %>% 
+  mutate(pruebas = rowSums(pruebasola4[ , c(2,3)], na.rm=TRUE)) %>% 
+  select(-c(pruebas.x, pruebas.y))
+
+pruebasola4 <- pruebasola4 %>% 
+  left_join(poblacion, pruebasola4, by = "cvegeo") %>% 
+  mutate(porc_pruebas = round(pruebas/poblacion*100, 3)) %>% 
+  select(-c(clave_entidad, clave_municipio, pobreza, pobreza_pob))
+
+##ola 5
+
+pruebasola5 <- remotapru %>% 
+  filter(semana_epi == 21:39) %>% 
+  filter(annum == 2022) %>% 
+  mutate(cvegeo = paste0(entidad_res, municipio_res)) %>% 
+  group_by(cvegeo, semana_epi_completa, entidad_res, municipio_res, annum, semana_epi) %>% 
+  tally() %>% group_by(cvegeo) %>% summarise(pruebas = sum(n))
+
+pruebasola5 <- left_join(poblacion, pruebasola5) %>% 
+  mutate(porc_pruebas = round(pruebas/poblacion*100, 3)) %>% 
+  select(-c(clave_entidad, clave_municipio, pobreza, pobreza_pob))
+
+write_csv(pruebasola1, "pruebasola1.csv")
+write_csv(pruebasola2, "pruebasola2.csv")
+write_csv(pruebasola3, "pruebasola3.csv")
+write_csv(pruebasola4, "pruebasola4.csv")
+write_csv(pruebasola5, "pruebasola5.csv")
+
+ 
