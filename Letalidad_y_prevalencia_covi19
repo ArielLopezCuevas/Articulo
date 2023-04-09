@@ -99,7 +99,7 @@ def_diabe <- conteos %>%
   group_by(cvegeo, ent_nom, mun_nom) %>% 
   summarise(defun_diabetes = sum(casos)) %>% na.omit()
 
-def_diabe <- left_join(contagios, den_diabe) %>% 
+def_diabe <- left_join(contagios, def_diabe) %>% 
   mutate(letalidad = round(defun_diabetes/contagios*100, 2)) %>% 
   na.omit()
 
@@ -113,7 +113,7 @@ def_hiperten <- conteos %>%
   group_by(cvegeo, ent_nom, mun_nom) %>% 
   summarise(defun_hipertension = sum(casos)) %>% na.omit
 
-def_hiperten <- left_join(contagios, den_hiperten) %>% 
+def_hiperten <- left_join(contagios, def_hiperten) %>% 
   mutate(letalidad = round(defun_hipertension/contagios*100, 2)) %>% 
   na.omit()
 
